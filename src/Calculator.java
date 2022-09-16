@@ -4,57 +4,54 @@ import java.util.List;
 public class Calculator {
     public static void main(String[] args) {
         String str = "23+43+35+5-32";
-        System.out.println(numbers(str));
+        System.out.println(calc(numbersToList(str)));
 
     }
 
-    public static boolean znaki(String s){
-        return (s.equals("+")||s.equals("-"));
+    public static boolean znaki(String s) {
+        return (s.equals("+") || s.equals("-"));
     }
 
-    public static int numbers(String str){
-        String [] str1 = str.split("");
-        String chislo="";
-        List<String> chisla = new ArrayList<>();
-        List<Integer> chislaInt = new ArrayList<>();
-        for (int i=0; i<str1.length;i++){
+    public static List<String> numbersToList(String str) {
+        String[] str1 = str.split("");
+        String number = "";
+        List<String> numbers = new ArrayList<>();
+        for (int i = 0; i < str1.length; i++) {
             if (znaki(str1[i])) {
-                chisla.add(chislo);
-                chisla.add(str1[i]);
-                chislo="";
-            }else chislo = chislo.concat(str1[i]);
+                numbers.add(number);
+                numbers.add(str1[i]);
+                number = "";
+            } else number = number.concat(str1[i]);
 
-            if (i == str1.length-1) chisla.add(chislo);
+            if (i == str1.length - 1) numbers.add(number);
 
         }
+        return numbers;
 
-        for (String s:chisla){
-            if (!znaki(s)) chislaInt.add(Integer.parseInt(s));
-        }
+    }
 
-
-        for (int i=0; i<chisla.size()-1; i++) {
-            switch (chisla.get(i)){
-                case "+":{
-                    int j=1;
-                    chislaInt.add(0,chislaInt.get(j-1)+chislaInt.get(j));
-                    chislaInt.remove(j);
-                    if (chislaInt.size()!=2) chislaInt.remove(j);
-                    break;
-                }
-                case "-":{
-                    int j=1;
-                    chislaInt.add(0,chislaInt.get(j-1)-chislaInt.get(j));
-                    chislaInt.remove(j);
-                    if (chislaInt.size()!=2)chislaInt.remove(j);
-                    break;
-                }
-
+    public static int calc(List<String> numbers) {
+        int result = 0;
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            if (i == 0) {
+                result = Integer.parseInt(numbers.get(i));
             }
 
+            if (znaki(numbers.get(i))) {
+                result = action(numbers.get(i), result, Integer.parseInt(numbers.get(i + 1)));
+            }
         }
-        return chislaInt.get(0);
+        return result;
 
+    }
+
+    public static int action(String sign, int a, int b) {
+
+        return switch (sign) {
+            case "+" -> a + b;
+            case "-" -> a - b;
+            default -> 0;
+        };
 
     }
 
