@@ -3,13 +3,21 @@ import java.util.List;
 
 public class Calculator {
     public static void main(String[] args) {
-        String str = "23+43+35+5-32";
-        System.out.println(calc(numbersToList(str)));
+        String str = "43-11+24*6/7";
+        System.out.println(calc(calc2(numbersToList(str))));
 
     }
 
-    public static boolean znaki(String s) {
+    public static boolean isSign(String s) {
+        return (s.equals("+") || s.equals("-") || s.equals("*") ||s.equals("/") );
+    }
+
+    public static boolean isSignPlusOrMinus(String s){
         return (s.equals("+") || s.equals("-"));
+    }
+
+    public static boolean isSignMultiplicationOrDivision(String s){
+        return (s.equals("*") || s.equals("/"));
     }
 
     public static List<String> numbersToList(String str) {
@@ -17,7 +25,7 @@ public class Calculator {
         String number = "";
         List<String> numbers = new ArrayList<>();
         for (int i = 0; i < str1.length; i++) {
-            if (znaki(str1[i])) {
+            if (isSign(str1[i])) {
                 numbers.add(number);
                 numbers.add(str1[i]);
                 number = "";
@@ -30,22 +38,37 @@ public class Calculator {
 
     }
 
-    public static int calc(List<String> numbers) {
-        int result = 0;
+    public static double calc(List<String> numbers) {
+        double result = 0;
         for (int i = 0; i < numbers.size() - 1; i++) {
             if (i == 0) {
-                result = Integer.parseInt(numbers.get(i));
+                result = Double.parseDouble(numbers.get(i));
             }
 
-            if (znaki(numbers.get(i))) {
-                result = action(numbers.get(i), result, Integer.parseInt(numbers.get(i + 1)));
+            if (isSignPlusOrMinus(numbers.get(i))) {
+                result = actionSumOrSubtraction(numbers.get(i), result, Double.parseDouble(numbers.get(i + 1)));
             }
         }
         return result;
 
     }
 
-    public static int action(String sign, int a, int b) {
+    public static List<String> calc2(List<String> numbers) {
+        double result = 0;
+        for (int i = 0; ;i++) {
+        if (isSignMultiplicationOrDivision(numbers.get(i))) {
+                result = actionMultiplicationOrDivision(numbers.get(i), Double.parseDouble(numbers.get(i - 1)), Double.parseDouble(numbers.get(i + 1)));
+                numbers.set(i-1, String.valueOf(result));
+                numbers.remove(i);
+                numbers.remove(i);
+                i=i-1;
+            }
+         if (i == numbers.size() - 1) break;
+        }
+        return numbers;
+
+    }
+    public static double actionSumOrSubtraction(String sign, double a, double b) {
 
         return switch (sign) {
             case "+" -> a + b;
@@ -54,6 +77,17 @@ public class Calculator {
         };
 
     }
+    public static double actionMultiplicationOrDivision(String sign, double a, double b) {
+
+        return switch (sign) {
+            case "*" -> a * b;
+            case "/" -> a / b;
+            default -> 0;
+        };
+
+    }
+
+
 
 
 }
