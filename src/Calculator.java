@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Calculator {
     public static void main(String[] args) {
-        String str = "3*11-7+24*6/7";
+        String str = "3+(4*(2-1))";
         System.out.println(calc(calc2(numbersToList(str))));
     }
 
@@ -25,7 +25,7 @@ public class Calculator {
         List<String> numbers = new ArrayList<>();
         for (int i = 0; i < str1.length; i++) {
             if (isSign(str1[i])) {
-                numbers.add(number);
+               if () numbers.add(number);
                 numbers.add(str1[i]);
                 number = "";
             } else number = number.concat(str1[i]);
@@ -63,6 +63,31 @@ public class Calculator {
             if (i == numbers.size() - 1) break;
         }
         return numbers;
+    }
+
+    public static double calc3(List<String> numbers) {
+        List<Integer> openBrasket = new ArrayList<>();
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            if (numbers.get(i).equals("(")) {
+                openBrasket.add(i);
+            }
+            if (numbers.get(i).equals(")")) {
+                if (numbers.size() == 1) {
+                    int startIndex = openBrasket.get(0);
+                    double res = calc3(numbers.subList(startIndex, i));
+                    numbers.set(openBrasket.get(0), String.valueOf(res));
+                    for (int j = startIndex+1; j<=i; j++) {
+                        numbers.remove(j);
+                    }
+                    openBrasket.remove(0);
+                }
+                openBrasket.remove(numbers.size() - 1);
+
+            }
+        }
+
+
+        return calc(calc2(numbers));
     }
 
     public static double actionSumOrSubtraction(String sign, double a, double b) {
