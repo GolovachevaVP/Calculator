@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1a08decc-9708-4920-95f8-0948fc85ebc9" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/Brasket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculator.java" afterDir="false" />
     </list>
@@ -68,6 +67,9 @@
       <list>
         <item itemvalue="Application.Calculator" />
         <item itemvalue="Java Scratch.Scratch" />
+        <item itemvalue="Java Scratch.Scratch" />
+        <item itemvalue="Application.Calculator" />
+        <item itemvalue="Application.Calculator" />
       </list>
     </recent_temporary>
   </component>
@@ -136,8 +138,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Calculator.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="3" />
+          <line>76</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

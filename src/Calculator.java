@@ -4,11 +4,11 @@ import java.util.List;
 public class Calculator {
     public static void main(String[] args) {
         String str = "3+(4*(2-1))";
-        System.out.println(calc(calc2(numbersToList(str))));
+        System.out.println(calc3(numbersToList(str)));
     }
 
     public static boolean isSign(String s) {
-        return (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/"));
+        return (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("("));
     }
 
     public static boolean isSignPlusOrMinus(String s) {
@@ -25,10 +25,17 @@ public class Calculator {
         List<String> numbers = new ArrayList<>();
         for (int i = 0; i < str1.length; i++) {
             if (isSign(str1[i])) {
-               if () numbers.add(number);
+                if (!str1[i-1].equals(")")) numbers.add(number);
                 numbers.add(str1[i]);
                 number = "";
-            } else number = number.concat(str1[i]);
+            } else if (!str1[i].equals("(")&&!str1[i].equals(")")) {
+
+                number = number.concat(str1[i]);
+            }
+
+            if (str1[i].equals("(")){
+                numbers.add(str1[i]);
+            }
 
             if (i == str1.length - 1) numbers.add(number);
         }
