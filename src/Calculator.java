@@ -8,7 +8,7 @@ public class Calculator {
     }
 
     public static boolean isSign(String s) {
-        return (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("("));
+        return (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals(")"));
     }
 
     public static boolean isSignPlusOrMinus(String s) {
@@ -37,7 +37,7 @@ public class Calculator {
                 numbers.add(str1[i]);
             }
 
-            if (i == str1.length - 1) numbers.add(number);
+            if (i == str1.length - 1 && !str1[i].equals(")") ) numbers.add(number);
         }
         return numbers;
     }
@@ -73,25 +73,34 @@ public class Calculator {
     }
 
     public static double calc3(List<String> numbers) {
+
         List<Integer> openBrasket = new ArrayList<>();
-        for (int i = 0; i < numbers.size() - 1; i++) {
+        for (int i = 0; ; i++) {
+
+            if(!(i<numbers.size())) {
+                break;
+            }
             if (numbers.get(i).equals("(")) {
                 openBrasket.add(i);
             }
             if (numbers.get(i).equals(")")) {
-                if (numbers.size() == 1) {
+                if (openBrasket.size() == 1) {
                     int startIndex = openBrasket.get(0);
-                    double res = calc3(numbers.subList(startIndex, i));
-                    numbers.set(openBrasket.get(0), String.valueOf(res));
-                    for (int j = startIndex+1; j<=i; j++) {
-                        numbers.remove(j);
+                    double res = calc3(numbers.subList(startIndex+1, i));
+                    numbers.set(startIndex, String.valueOf(res));
+                    for (int j = startIndex+1; j==i; j++){
+                        numbers.remove(startIndex+1);
                     }
-                    openBrasket.remove(0);
+
+
                 }
-                openBrasket.remove(numbers.size() - 1);
+                openBrasket.remove(openBrasket.size() - 1);
 
             }
+
+
         }
+
 
 
         return calc(calc2(numbers));
