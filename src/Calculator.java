@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Calculator {
     public static void main(String[] args) {
-        String str = "3+(11-7+(24*6))/7+5";
+        String str = "3+(11-7+24*6)/7+5";
         System.out.println(calc3((numbersToList(str))));
     }
 
