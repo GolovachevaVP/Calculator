@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Calculator {
     public static void main(String[] args) {
-        String str = "3*(11-7+24*6)/7";
+        String str = "3+(11-7+(24*6))/7+5";
         System.out.println(calc3((numbersToList(str))));
     }
 
@@ -84,6 +84,7 @@ public class Calculator {
         double result = 0;
         for (int i = 0; i<numbers.size()-1 ; i++) {
             if (numbers.get(i).equals("(")) {
+
                 calc(calc2(numbers,i),i);
                 //numbers.set(i - 1, String.valueOf(result));
                 numbers.remove(i);
