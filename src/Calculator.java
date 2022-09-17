@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Calculator {
     public static void main(String[] args) {
-        String str = "3+(4*(2-1))";
+        String str = "(14+23-(3*(6-3))/3+2)*(5-3)";
         System.out.println(calc3(numbersToList(str)));
     }
 
@@ -87,11 +87,12 @@ public class Calculator {
                 if (openBrasket.size() == 1) {
                     int startIndex = openBrasket.get(0);
                     double res = calc3(numbers.subList(startIndex+1, i));
-                    numbers.set(startIndex, String.valueOf(res));
-                    for (int j = startIndex+1; j==i; j++){
-                        numbers.remove(startIndex+1);
-                    }
-
+                   // numbers.set(startIndex, String.valueOf(res));
+//                    for (int j = startIndex+1; j<=numbers.size(); j++){
+//
+//                    }
+                    numbers.remove(startIndex);
+                    numbers.remove(startIndex+1);
 
                 }
                 openBrasket.remove(openBrasket.size() - 1);
