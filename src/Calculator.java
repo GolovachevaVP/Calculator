@@ -3,7 +3,8 @@ import java.util.List;
 
 public class Calculator {
     public static void main(String[] args) {
-        String str = "(14+23-(3*(6-3))/3+2)*(5-3)";
+       String str = "(14+23-(3*(6-3))/3+2)*(5-3)";
+        //String str = "3+(4*(3-1))";
         System.out.println(calc3(numbersToList(str)));
     }
 
@@ -43,6 +44,9 @@ public class Calculator {
     }
 
     public static double calc(List<String> numbers) {
+        if (numbers.size() == 1) {
+            return Double.parseDouble(numbers.get(0));
+        }
         double result = 0;
         for (int i = 0; ; i++) {
             if (isSignPlusOrMinus(numbers.get(i))) {
@@ -86,24 +90,15 @@ public class Calculator {
             if (numbers.get(i).equals(")")) {
                 if (openBrasket.size() == 1) {
                     int startIndex = openBrasket.get(0);
-                    double res = calc3(numbers.subList(startIndex+1, i));
-                   // numbers.set(startIndex, String.valueOf(res));
-//                    for (int j = startIndex+1; j<=numbers.size(); j++){
-//
-//                    }
-                    numbers.remove(startIndex);
-                    numbers.remove(startIndex+1);
-
+                    List<String> sublist = new ArrayList<>(numbers.subList(startIndex+1, i));
+                    double res = calc3(sublist);
+                    numbers.set(startIndex, Double.toString(res));
+                    numbers.subList(startIndex+1, i+1).clear();
+                    i=0;
                 }
-                openBrasket.remove(openBrasket.size() - 1);
-
+                if (openBrasket.size()!=0)openBrasket.remove(openBrasket.size() - 1);
             }
-
-
         }
-
-
-
         return calc(calc2(numbers));
     }
 

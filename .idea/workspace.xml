@@ -83,6 +83,7 @@
       <updated>1663333199045</updated>
       <workItem from="1663333200687" duration="20887000" />
       <workItem from="1663424943900" duration="1609000" />
+      <workItem from="1663499432060" duration="1821000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1663352097322</created>
@@ -145,13 +146,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Calculator.java</url>
-          <line>106</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Calculator.java</url>
-          <line>88</line>
-          <option name="timeStamp" value="34" />
+          <line>87</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
