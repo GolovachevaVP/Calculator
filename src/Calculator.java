@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Calculator {
     public static void main(String[] args) {
-        String str = "11-7+24-7";
+        String str = "11--7+24-7";
         System.out.println(calc(numbersToList(str)));
     }
 
@@ -44,6 +44,7 @@ public class Calculator {
                 i = i - 1;
             }
             if (i == numbers.size() - 1) break;
+
         }
         return result;
     }
